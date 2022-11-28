@@ -13,11 +13,35 @@ vector<string> split(const string &);
  * The function accepts 2D_INTEGER_ARRAY arr as parameter.
  */
 
-int hourglassSum(vector<vector<int>> arr) {
+int hourglassSum(vector<vector<int>> arr)
+{
+    int c1, c2, c3;
+    int r1, r2, r3;
+    int sum = 0;
 
-    
+    int maxHourGlass = INT32_MIN;
 
+    for (int column = 0; column < 4; column++)
+    {
+        for (int row = 0; row < 4; row++)
+        {
+            c1 = column; // lines 28 to 34 are to increase the readibility
+            c2 = column + 1;
+            c3 = column + 2;
+
+            r1 = row;
+            r2 = row + 1;
+            r3 = row + 2;
+
+            sum = arr[r1][c1] + arr[r1][c2] + arr[r1][c3] + arr[r2][c2] + arr[r3][c1] + arr[r3][c2] + arr[r3][c3];
+
+            maxHourGlass = max(sum, maxHourGlass);
+        }
+    }
+    return maxHourGlass;
 }
+
+
 
 int main()
 {
