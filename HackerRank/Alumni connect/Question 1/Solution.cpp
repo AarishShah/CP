@@ -17,24 +17,24 @@ vector<string> split(const string &);
 
 long maximumSum(vector<long> a, long m)
 {
-    long max_ans = LONG_MIN;
     int size = a.size();
-    int value = 0;
-    for (long j = size; j > 0; j--)
+    int sum = 0;
+    long value = 0;
+    long max_sum = 0;
+
+    for (int w = 0; w < size; w++)
     {
-        for (long i = 0; i < size - j; i++)
+        for (int j = 0; j < size - w; j++)
         {
-            long z = i;
-            while (z != j) // error resides here(not sure), condition has not been set properly ... fix after exams
+            for (int i = size - j; i > j; i--)
             {
-                value = value + a[z];
-                z++;
+                sum += a[i];
+                value = (sum % m);
+                max_sum = max(value, max_sum);
             }
-            long save = value % m;
-            max_ans = max(save, max_ans);
         }
     }
-    return max_ans;
+    return max_sum;
 }
 
 // incorrect sol
